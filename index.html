@@ -6,6 +6,15 @@
   <title>Élégance Noire · Commande</title>
   
   <style>
+    /* ========== VARIABLES CSS DU THÈME ========== */
+    :root {
+      --primary-color: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #4caf50;
+      --primary-very-light: #e8f5e9;
+      --primary-transparent: rgba(46, 125, 50, 0.15);
+    }
+
     /* ========== STYLE CSS ========== */
     * {
       margin: 0;
@@ -91,7 +100,7 @@
     }
 
     .indicator.active {
-      background: #0b5e42;
+      background: var(--primary-color);
       width: 20px;
       border-radius: 10px;
     }
@@ -99,7 +108,7 @@
     .price {
       font-size: 2rem;
       font-weight: 700;
-      color: #0b5e42;
+      color: var(--primary-color);
       display: inline-block;
       padding: 0.2rem 0;
       border-bottom: 3px solid #d4b68a;
@@ -116,6 +125,80 @@
       border-left: 5px solid #b99a7b;
       font-weight: 350;
       white-space: pre-line;
+    }
+
+    /* ===== SECTION COULEURS PRODUIT ===== */
+    .colors-section {
+      margin: 1.5rem 0 1.8rem;
+      padding: 1.2rem 0;
+      border-top: 2px dashed var(--primary-transparent);
+      border-bottom: 2px dashed var(--primary-transparent);
+    }
+
+    .colors-title {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #4b5b5c;
+      margin-bottom: 1rem;
+    }
+
+    .color-circles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .color-circle {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .color-circle.selected {
+      border-color: var(--primary-color);
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .color-circle:hover {
+      transform: scale(1.05);
+    }
+
+    .color-tooltip {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .color-circle:hover .color-tooltip {
+      opacity: 1;
+    }
+
+    .selected-color-text {
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      margin-top: 1rem;
     }
 
     .form-group {
@@ -150,9 +233,9 @@
     }
 
     input:focus, select:focus {
-      border-color: #9f7e66;
+      border-color: var(--primary-color);
       outline: none;
-      box-shadow: 0 0 0 4px rgba(159,126,102,0.08);
+      box-shadow: 0 0 0 4px var(--primary-transparent);
     }
 
     .radio-group {
@@ -178,17 +261,17 @@
     }
 
     .radio-group div:has(input:checked) {
-      background: #c8e6d9;
-      border-color: #0b5e42;
+      background: var(--primary-very-light);
+      border-color: var(--primary-color);
       border-width: 2.5px;
-      box-shadow: 0 0 0 4px rgba(11,94,66,0.25);
+      box-shadow: 0 0 0 4px var(--primary-transparent);
     }
 
     .radio-group input[type="radio"] {
       width: 1.5rem;
       height: 1.5rem;
       margin: 0;
-      accent-color: #0b5e42;
+      accent-color: var(--primary-color);
       transform: scale(1.2);
       border-radius: 50%;
       border: 2px solid #2a5c4f;
@@ -210,7 +293,7 @@
     }
 
     .delivery-badge {
-      background: #0b5e42 !important;
+      background: var(--primary-color) !important;
       color: white !important;
       padding: 4px 12px !important;
       border-radius: 40px !important;
@@ -257,7 +340,7 @@
       height: 58px;
       font-size: 2.2rem;
       font-weight: 400;
-      color: #0b5e42;
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -267,8 +350,8 @@
     }
 
     .quantity-stepper button:active {
-      background: #c8dbd4;
-      color: #06422f;
+      background: var(--primary-very-light);
+      color: var(--primary-dark);
     }
 
     .quantity-stepper input {
@@ -279,7 +362,7 @@
       padding: 0.9rem 0;
       font-size: 1.6rem;
       font-weight: 700;
-      color: #0b4f3a;
+      color: var(--primary-dark);
       background: white;
       -moz-appearance: textfield;
     }
@@ -291,16 +374,16 @@
     }
 
     .total-price {
-      background: #e3eee9;
+      background: var(--primary-very-light);
       padding: 1.2rem 1.5rem;
       border-radius: 30px;
       font-size: 1.7rem;
       font-weight: 800;
-      color: #054d39;
+      color: var(--primary-dark);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #aec7bd;
+      border: 1px solid var(--primary-light);
       margin: 0.8rem 0 0.5rem;
     }
 
@@ -329,7 +412,7 @@
     .btn {
       width: 100%;
       padding: 1.2rem 1.8rem;
-      background: #1a5e4b;
+      background: var(--primary-color);
       color: white;
       border: none;
       border-radius: 60px;
@@ -339,11 +422,11 @@
       margin-top: 1.8rem;
       cursor: pointer;
       transition: background 0.15s, transform 0.1s;
-      box-shadow: 0 10px 20px rgba(26,94,75,0.25);
+      box-shadow: 0 10px 20px var(--primary-transparent);
     }
 
     .btn:hover {
-      background: #0d4637;
+      background: var(--primary-dark);
     }
 
     .btn:active {
@@ -359,8 +442,8 @@
     }
 
     .success-message {
-      background: #e1f3e8;
-      color: #0b4f3a;
+      background: var(--primary-very-light);
+      color: var(--primary-dark);
       padding: 1rem;
       border-radius: 20px;
       margin-top: 1.8rem;
@@ -381,6 +464,7 @@
       .quantity-stepper button { width: 48px; height: 52px; font-size: 2rem; }
       .quantity-stepper input { width: 70px; font-size: 1.4rem; }
       .radio-group div { padding: 0.6rem 1rem; }
+      .color-circle { width: 35px; height: 35px; }
     }
   </style>
 </head>
@@ -403,6 +487,16 @@
     <div class="description" id="productDescription">
       ✦ Acier inoxydable • Verre saphir • Étanche 5 ATM ✦<br>
       Design intemporel, mouvement suisse. Livraison rapide dans toute l'Algérie.
+    </div>
+    
+    <!-- ===== SECTION COULEURS PRODUIT (AJOUTÉE) ===== -->
+    <div id="colorsSection" class="colors-section" style="display: none;">
+      <span class="colors-title">🎨 Couleur du produit</span>
+      <div class="color-circles" id="colorCircles">
+        <!-- Les cercles de couleur seront générés dynamiquement -->
+      </div>
+      <div class="selected-color-text" id="selectedColorText"></div>
+      <input type="hidden" id="selectedColor" name="selectedColor" value="">
     </div>
     
     <!-- ===== ORDER FORM ===== -->
@@ -493,12 +587,64 @@
 
       const config = window.CONFIG;
       const PRODUCT = config.PRODUCT;
+      const COLORS = config.COLORS;
       const DELIVERY_FEES = config.DELIVERY_FEES;
 
       // Mise à jour du titre et de la description
       document.getElementById('productName').textContent = PRODUCT.name;
       document.getElementById('productDescription').innerHTML = PRODUCT.description.replace(/\n/g, '<br>');
       document.getElementById('prixUnitaire').textContent = PRODUCT.unitPrice.toLocaleString('fr-DZ') + ' ' + PRODUCT.currency;
+
+      // ========== GESTION DES COULEURS PRODUIT ==========
+      const colorsSection = document.getElementById('colorsSection');
+      const colorCircles = document.getElementById('colorCircles');
+      const selectedColorText = document.getElementById('selectedColorText');
+      const selectedColorInput = document.getElementById('selectedColor');
+      
+      if (COLORS.enableColors && COLORS.colors && COLORS.colors.length > 0) {
+        // Afficher la section des couleurs
+        colorsSection.style.display = 'block';
+        
+        // Générer les cercles de couleur
+        COLORS.colors.forEach((color, index) => {
+          const circle = document.createElement('div');
+          circle.className = 'color-circle' + (index === 0 ? ' selected' : '');
+          circle.style.backgroundColor = color.value;
+          circle.setAttribute('data-color-name', color.name);
+          circle.setAttribute('data-color-value', color.value);
+          
+          // Ajouter un tooltip avec le nom de la couleur
+          const tooltip = document.createElement('span');
+          tooltip.className = 'color-tooltip';
+          tooltip.textContent = color.name;
+          circle.appendChild(tooltip);
+          
+          // Ajouter l'événement de clic
+          circle.addEventListener('click', function() {
+            // Retirer la classe selected de tous les cercles
+            document.querySelectorAll('.color-circle').forEach(c => c.classList.remove('selected'));
+            // Ajouter la classe selected au cercle cliqué
+            this.classList.add('selected');
+            // Mettre à jour le texte et l'input caché
+            const colorName = this.getAttribute('data-color-name');
+            const colorValue = this.getAttribute('data-color-value');
+            selectedColorText.textContent = `Couleur sélectionnée : ${colorName}`;
+            selectedColorInput.value = colorValue;
+          });
+          
+          colorCircles.appendChild(circle);
+        });
+        
+        // Sélectionner la première couleur par défaut
+        if (COLORS.colors.length > 0) {
+          const firstColor = COLORS.colors[0];
+          selectedColorText.textContent = `Couleur sélectionnée : ${firstColor.name}`;
+          selectedColorInput.value = firstColor.value;
+        }
+      } else {
+        // Cacher complètement la section des couleurs
+        colorsSection.style.display = 'none';
+      }
 
       // ========== GÉNÉRATION DU CARROUSEL ==========
       const carouselTrack = document.getElementById('carouselTrack');
@@ -704,7 +850,7 @@
         
         totalSpan.textContent = totalGeneral.toLocaleString('fr-DZ') + ' DZD';
         
-        let produitText = `⌚ Montre: ${PRODUCT.unitPrice.toLocaleString('fr-DZ')} DZD x${qty}`;
+        let produitText = ` Produit : ${PRODUCT.unitPrice.toLocaleString('fr-DZ')} DZD x${qty}`;
         let livraisonText = '';
         
         if (fraisLivraison > 0) {
@@ -864,6 +1010,15 @@
         const livraison = document.querySelector('input[name="livraisonType"]:checked')?.value || 'Stop Desk';
         const quantite = parseInt(quantiteInput.value, 10);
         
+        // Récupérer la couleur sélectionnée si activée
+        let couleurValue = '';
+        if (COLORS.enableColors && COLORS.colors && COLORS.colors.length > 0) {
+          const selectedColor = document.querySelector('.color-circle.selected');
+          if (selectedColor) {
+            couleurValue = selectedColor.getAttribute('data-color-name');
+          }
+        }
+        
         const fraisLivraison = getFraisActuel();
         const totalProduit = PRODUCT.unitPrice * quantite;
         const totalGeneral = totalProduit + fraisLivraison;
@@ -880,7 +1035,8 @@
           fraisLivraison: fraisLivraison,
           total: totalGeneral,
           statut: 'Nouvelle commande',
-          produit: PRODUCT.name
+          produit: PRODUCT.name,
+          couleur: couleurValue // Ajout de la couleur dans les données envoyées
         };
 
         const feedbackDiv = document.getElementById('formFeedback');
@@ -894,6 +1050,21 @@
           quantiteInput.value = 1;
           document.getElementById('stopdesk').checked = true;
           document.getElementById('wilaya').value = '';
+          
+          // Réinitialiser la sélection de couleur à la première
+          if (COLORS.enableColors && COLORS.colors && COLORS.colors.length > 0) {
+            const circles = document.querySelectorAll('.color-circle');
+            circles.forEach((c, idx) => {
+              if (idx === 0) {
+                c.classList.add('selected');
+                selectedColorText.textContent = `Couleur sélectionnée : ${COLORS.colors[0].name}`;
+                selectedColorInput.value = COLORS.colors[0].value;
+              } else {
+                c.classList.remove('selected');
+              }
+            });
+          }
+          
           updatePrixTotal();
           clearFieldErrors();
         } else {
