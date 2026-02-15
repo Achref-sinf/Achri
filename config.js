@@ -4,13 +4,13 @@
 const PRODUCT_CONFIG = {
     name: "Élégance Noire",
     description: "✦ Acier inoxydable • Verre saphir • Étanche 5 ATM ✦\nDesign intemporel, mouvement suisse. Livraison rapide dans toute l'Algérie.",
-    unitPrice: 1300, // Prix en DZD
+    unitPrice: 1200, // Prix en DZD
     images: ["w5.png", "w1.png", "w2.png", "w3.png", "w4.png"], // Ordre des images
     currency: "DZD"
 };
 
 // URL Google Sheets pour les commandes
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJbaDk_xATjkfx0x0F0uBQRh0HHZPoASGVWdqEa_3gjMDCQv1Pz0mKH4hvA6pLhykkoA/exec'; // À remplacer par votre vrai URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw4NPx8hJae07a8bxO084oPPmVXHdWIgmN95e-4-OMB-6ufCkQ-cfNgfBr4qjlZcTlWsg/exec'; // À remplacer par votre vrai URL
 
 // Configuration des wilayas avec frais de livraison
 const DELIVERY_FEES = {
@@ -80,4 +80,3 @@ window.CONFIG = {
     DELIVERY_FEES: DELIVERY_FEES,
     GOOGLE_SCRIPT_URL: GOOGLE_SCRIPT_URL
 };
-
