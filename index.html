@@ -704,7 +704,7 @@
         
         totalSpan.textContent = totalGeneral.toLocaleString('fr-DZ') + ' DZD';
         
-        let produitText = ` ⌚ Montre: : ${PRODUCT.unitPrice.toLocaleString('fr-DZ')} DZD x${qty}`;
+        let produitText = `⌚ Montre: ${PRODUCT.unitPrice.toLocaleString('fr-DZ')} DZD x${qty}`;
         let livraisonText = '';
         
         if (fraisLivraison > 0) {
@@ -839,27 +839,20 @@
       }
 
       async function envoyerVersGoogleSheets(data) {
-  try {
-    const response = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'text/plain' // تغيير مهم
-      },
-      body: JSON.stringify(data),
-      redirect: 'follow'
-    });
-    
-    // محاولة قراءة الرد
-    const text = await response.text();
-    console.log('Response:', text);
-    
-    // نعتبر أي رد كنجاح لأن no-cors لا يعطي تفاصيل
-    return true;
-  } catch (error) {
-    console.error('Erreur fetch:', error);
-    return false;
-  }
-}
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          return true;
+        } catch (error) {
+          console.error('Erreur fetch Google Sheets:', error);
+          return false;
+        }
+      }
+
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
         if (!validateForm()) return;
@@ -924,5 +917,4 @@
     })();
   </script>
 </body>
-
 </html>
