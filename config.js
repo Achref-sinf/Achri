@@ -9,6 +9,21 @@ const PRODUCT_CONFIG = {
     currency: "DZD"
 };
 
+// NOUVEAU : Configuration des couleurs produit
+const COLORS_CONFIG = {
+    enableColors: false, // Mettre false pour désactiver complètement les couleurs
+    colors: [
+        { name: "Rouge", value: "#ff0000" },
+        { name: "Bleu", value: "#0000ff" },
+        { name: "Noir", value: "#000000" }
+    ]
+};
+
+// NOUVEAU : Configuration de la couleur du thème
+const THEME_CONFIG = {
+    primaryColor: "#1a7420ff" // Couleur principale (boutons, titres, éléments interactifs)
+};
+
 // URL Google Sheets pour les commandes
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw4NPx8hJae07a8bxO084oPPmVXHdWIgmN95e-4-OMB-6ufCkQ-cfNgfBr4qjlZcTlWsg/exec'; // À remplacer par votre vrai URL
 
@@ -74,10 +89,49 @@ const DELIVERY_FEES = {
     "58 - In Guezzam": { stopdesk: 1050, domicile: 1600 }
 };
 
+// Appliquer les variables CSS pour le thème
+(function applyThemeColors() {
+    if (typeof window !== 'undefined' && window.document) {
+        const root = document.documentElement;
+        const primaryColor = THEME_CONFIG.primaryColor;
+        
+        // Couleurs basées sur la couleur primaire (générées automatiquement)
+        root.style.setProperty('--primary-color', primaryColor);
+        root.style.setProperty('--primary-dark', adjustColor(primaryColor, -20));
+        root.style.setProperty('--primary-light', adjustColor(primaryColor, 20));
+        root.style.setProperty('--primary-very-light', adjustColor(primaryColor, 40, 0.1));
+        root.style.setProperty('--primary-transparent', adjustColor(primaryColor, 0, 0.15));
+    }
+})();
+
+// Fonction utilitaire pour ajuster les couleurs (assombrir/éclaircir)
+function adjustColor(hex, percent, opacity = 1) {
+    if (typeof window === 'undefined') return hex;
+    
+    // Convertir hex en RGB
+    let r = parseInt(hex.substring(1,3), 16);
+    let g = parseInt(hex.substring(3,5), 16);
+    let b = parseInt(hex.substring(5,7), 16);
+    
+    // Ajuster
+    r = Math.min(255, Math.max(0, r + percent));
+    g = Math.min(255, Math.max(0, g + percent));
+    b = Math.min(255, Math.max(0, b + percent));
+    
+    // Retourner en rgba si besoin d'opacité
+    if (opacity < 1) {
+        return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    }
+    
+    // Retourner en hex
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 // Exporter les configurations pour les rendre disponibles globalement
 window.CONFIG = {
     PRODUCT: PRODUCT_CONFIG,
+    COLORS: COLORS_CONFIG,
+    THEME: THEME_CONFIG,
     DELIVERY_FEES: DELIVERY_FEES,
     GOOGLE_SCRIPT_URL: GOOGLE_SCRIPT_URL
 };
-
