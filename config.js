@@ -10,7 +10,7 @@ const PRODUCT_CONFIG = {
 };
 
 // URL Google Sheets pour les commandes
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3gyV3OrvZEusVzXwtHWyVcQuXUH0bMgor2aHw-XbOSvdAVmOloCGHtRoduUJWtEA/exec'; // À remplacer par votre vrai URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJbaDk_xATjkfx0x0F0uBQRh0HHZPoASGVWdqEa_3gjMDCQv1Pz0mKH4hvA6pLhykkoA/exec'; // À remplacer par votre vrai URL
 
 // Configuration des wilayas avec frais de livraison
 const DELIVERY_FEES = {
@@ -81,4 +81,5 @@ window.CONFIG = {
     GOOGLE_SCRIPT_URL: GOOGLE_SCRIPT_URL
 
 };
+
 
