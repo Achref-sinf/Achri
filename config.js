@@ -11,7 +11,7 @@ const PRODUCT_CONFIG = {
 
 // NOUVEAU : Configuration des couleurs produit
 const COLORS_CONFIG = {
-    enableColors: true, // Mettre false pour désactiver complètement les couleurs
+    enableColors: false, // Mettre false pour désactiver complètement les couleurs
     colors: [
         { name: "Rouge", value: "#ff0000" },
         { name: "Bleu", value: "#0000ff" },
@@ -135,4 +135,5 @@ window.CONFIG = {
     DELIVERY_FEES: DELIVERY_FEES,
     GOOGLE_SCRIPT_URL: GOOGLE_SCRIPT_URL
 };
+
 
