@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Élégance Noire · Commande</title>
+  
+  <style>
+    /* ========== STYLE CSS ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #fbfaf8;
+      color: #1e2b2c;
+      line-height: 1.5;
+      padding: 0 0 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem;
+      background: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.02);
+      border-radius: 28px 28px 0 0;
+      margin-top: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1a2e3f;
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+
+    /* ===== CARROUSEL D'IMAGES TACTILE AVEC INFINI ===== */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      margin: 1.2rem 0 1rem;
+      background: #f4f2f0;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease-out;
+      cursor: grab;
+    }
+
+    .carousel-track:active {
+      cursor: grabbing;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4cfc9;
+      transition: all 0.2s ease;
+    }
+
+    .indicator.active {
+      background: #0b5e42;
+      width: 20px;
+      border-radius: 10px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0b5e42;
+      display: inline-block;
+      padding: 0.2rem 0;
+      border-bottom: 3px solid #d4b68a;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      color: #3a4e4f;
+      background: #f6f4f1;
+      padding: 1.2rem 1.3rem;
+      border-radius: 20px;
+      margin: 1.2rem 0 1.8rem;
+      border-left: 5px solid #b99a7b;
+      font-weight: 350;
+      white-space: pre-line;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #4b5b5c;
+      margin-bottom: 0.4rem;
+    }
+
+    label span {
+      color: #b4615a;
+      margin-left: 2px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      background-color: white;
+      border: 1.5px solid #e2e6e7;
+      border-radius: 16px;
+      transition: 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #9f7e66;
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(159,126,102,0.08);
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .radio-group div {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #f5f7f6;
+      padding: 0.7rem 1.5rem 0.7rem 1rem;
+      border-radius: 50px;
+      border: 2px solid #d0dbd8;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      position: relative;
+      flex: 1 1 auto;
+    }
+
+    .radio-group div:has(input:checked) {
+      background: #c8e6d9;
+      border-color: #0b5e42;
+      border-width: 2.5px;
+      box-shadow: 0 0 0 4px rgba(11,94,66,0.25);
+    }
+
+    .radio-group input[type="radio"] {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0;
+      accent-color: #0b5e42;
+      transform: scale(1.2);
+      border-radius: 50%;
+      border: 2px solid #2a5c4f;
+      cursor: pointer;
+      -webkit-appearance: radio;
+      -moz-appearance: radio;
+      appearance: radio;
+    }
+
+    .radio-group label {
+      display: inline;
+      text-transform: none;
+      font-weight: 650;
+      color: #1d3e3b;
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      letter-spacing: normal;
+      cursor: pointer;
+    }
+
+    .delivery-badge {
+      background: #0b5e42 !important;
+      color: white !important;
+      padding: 4px 12px !important;
+      border-radius: 40px !important;
+      margin-left: 8px !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      white-space: nowrap;
+    }
+
+    .field-error {
+      border: 2.5px solid #c03a2b !important;
+      background-color: #fff6f5 !important;
+      box-shadow: 0 0 0 3px rgba(192,58,43,0.15) !important;
+      animation: shake 0.3s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .quantity-stepper {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 2px solid #cbd9d4;
+      border-radius: 60px;
+      overflow: hidden;
+      width: fit-content;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .quantity-stepper button {
+      background: #edf3f1;
+      border: none;
+      width: 54px;
+      height: 58px;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: #0b5e42;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.1s;
+      padding-bottom: 6px;
+    }
+
+    .quantity-stepper button:active {
+      background: #c8dbd4;
+      color: #06422f;
+    }
+
+    .quantity-stepper input {
+      width: 80px;
+      text-align: center;
+      border: none;
+      border-radius: 0;
+      padding: 0.9rem 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0b4f3a;
+      background: white;
+      -moz-appearance: textfield;
+    }
+
+    .quantity-stepper input::-webkit-outer-spin-button,
+    .quantity-stepper input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .total-price {
+      background: #e3eee9;
+      padding: 1.2rem 1.5rem;
+      border-radius: 30px;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #054d39;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #aec7bd;
+      margin: 0.8rem 0 0.5rem;
+    }
+
+    .total-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: none;
+      color: #2a5a4f;
+    }
+
+    .frais-detail {
+      font-size: 0.9rem;
+      color: #2d5e55;
+      margin-top: 0.2rem;
+      display: flex;
+      justify-content: space-between;
+      background: #f0f9f5;
+      padding: 0.6rem 1.3rem;
+      border-radius: 40px;
+      border: 1px solid #c3dbd2;
+      font-weight: 500;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 1.2rem 1.8rem;
+      background: #1a5e4b;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 1.8rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 10px 20px rgba(26,94,75,0.25);
+    }
+
+    .btn:hover {
+      background: #0d4637;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .error-msg {
+      color: #c03a2b;
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      padding-left: 0.8rem;
+      font-weight: 600;
+    }
+
+    .success-message {
+      background: #e1f3e8;
+      color: #0b4f3a;
+      padding: 1rem;
+      border-radius: 20px;
+      margin-top: 1.8rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #6e8985;
+    }
+
+    @media (max-width: 380px) {
+      .container { padding: 1rem; }
+      h1 { font-size: 1.7rem; }
+      .quantity-stepper button { width: 48px; height: 52px; font-size: 2rem; }
+      .quantity-stepper input { width: 70px; font-size: 1.4rem; }
+      .radio-group div { padding: 0.6rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="productName">Élégance&nbsp;Noire</h1>
+    
+    <!-- ===== CARROUSEL D'IMAGES TACTILE INFINI ===== -->
+    <div class="carousel-container" id="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Les slides seront générés dynamiquement par JavaScript -->
+      </div>
+    </div>
+    
+    <!-- Indicateurs de position (points) -->
+    <div class="carousel-indicators" id="carouselIndicators"></div>
+    
+    <div class="price" id="prixUnitaire">1 200 DZD</div>
+    
+    <div class="description" id="productDescription">
+      ✦ Acier inoxydable • Verre saphir • Étanche 5 ATM ✦<br>
+      Design intemporel, mouvement suisse. Livraison rapide dans toute l'Algérie.
+    </div>
+    
+    <!-- ===== ORDER FORM ===== -->
+    <form id="orderForm">
+      <!-- Nom et Prénom -->
+      <div class="form-group">
+        <label>Nom et Prénom <span>*</span></label>
+        <input type="text" id="nom" placeholder="Ahmed Benali" autocomplete="name">
+        <div class="error-msg" id="errorNom"></div>
+      </div>
+      
+      <!-- Téléphone -->
+      <div class="form-group">
+        <label>Téléphone <span>*</span></label>
+        <input type="tel" id="tel" placeholder="0550 12 34 56" autocomplete="tel">
+        <div class="error-msg" id="errorTel"></div>
+      </div>
+      
+      <!-- WILAYA avec codes et frais -->
+      <div class="form-group">
+        <label>Wilaya <span>*</span></label>
+        <select id="wilaya">
+          <option value="" disabled selected>— Sélectionnez une wilaya —</option>
+        </select>
+        <div class="error-msg" id="errorWilaya"></div>
+      </div>
+      
+      <!-- Adresse complète -->
+      <div class="form-group">
+        <label>Adresse complète <span>*</span></label>
+        <input type="text" id="adresse" placeholder="N°, rue, cité, bâtiment...">
+        <div class="error-msg" id="errorAdresse"></div>
+      </div>
+      
+      <!-- TYPE DE LIVRAISON : RADIO BOUTONS -->
+      <div class="form-group">
+        <label>Type de livraison <span>*</span></label>
+        <div class="radio-group">
+          <div>
+            <input type="radio" id="stopdesk" name="livraisonType" value="Stop Desk" checked>
+            <label for="stopdesk">📦 Stop Desk (الى المكتب)<span class="delivery-badge" id="stopdeskPrice">0 DA</span></label>
+          </div>
+          <div>
+            <input type="radio" id="domicile" name="livraisonType" value="Livraison à domicile">
+            <label for="domicile">🚚 À domicile (الى البيت)<span class="delivery-badge" id="domicilePrice">0 DA</span></label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- QUANTITÉ : STE PARFAIT (boutons + et -) -->
+      <div class="form-group">
+        <label>Quantité <span>*</span></label>
+        <div class="quantity-stepper">
+          <button type="button" id="moinsBtn">−</button>
+          <input type="number" id="quantite" value="1" min="1" step="1" readonly>
+          <button type="button" id="plusBtn">+</button>
+        </div>
+      </div>
+      
+      <!-- PRIX TOTAL + DÉTAIL FRAIS -->
+      <div class="total-price">
+        <span class="total-label">💰 Total</span>
+        <span id="totalAffichage">0 DZD</span>
+      </div>
+      <div class="frais-detail" id="fraisDetail">
+        <span>Produit: 0 DZD x1</span>
+        <span>Livraison: 0 DA</span>
+      </div>
+      
+      <button type="submit" class="btn">✨ Commander maintenant</button>
+    </form>
+    
+    <div id="formFeedback"></div>
+    <div class="footer-note">⏚ Livraison express dans toute l'Algérie • Paiement à la livraison</div>
+  </div>
+
+  <!-- ===== CONFIG.JS ===== -->
+  <script src="config.js"></script>
+
+  <!-- ===== SCRIPT PRINCIPAL ===== -->
+  <script>
+    (function() {
+      // Vérifier que la configuration est chargée
+      if (!window.CONFIG) {
+        console.error('Erreur: config.js non chargé correctement');
+        return;
+      }
+
+      const config = window.CONFIG;
+      const PRODUCT = config.PRODUCT;
+      const DELIVERY_FEES = config.DELIVERY_FEES;
+
+      // Mise à jour du titre et de la description
+      document.getElementById('productName').textContent = PRODUCT.name;
+      document.getElementById('productDescription').innerHTML = PRODUCT.description.replace(/\n/g, '<br>');
+      document.getElementById('prixUnitaire').textContent = PRODUCT.unitPrice.toLocaleString('fr-DZ') + ' ' + PRODUCT.currency;
+
+      // ========== GÉNÉRATION DU CARROUSEL ==========
+      const carouselTrack = document.getElementById('carouselTrack');
+      const indicatorsContainer = document.getElementById('carouselIndicators');
+      
+      // Créer les slides avec les images (boucle infinie)
+      const images = PRODUCT.images;
+      const extendedImages = [images[images.length-1], ...images, images[0]];
+      
+      extendedImages.forEach((img, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `<img src="${img}" alt="${PRODUCT.name} - Vue ${index}" loading="lazy">`;
+        carouselTrack.appendChild(slide);
+      });
+      
+      // Créer les indicateurs
+      images.forEach((_, index) => {
+        const indicator = document.createElement('span');
+        indicator.className = 'indicator' + (index === 0 ? ' active' : '');
+        indicatorsContainer.appendChild(indicator);
+      });
+
+      // ========== CARROUSEL INFINI TACTILE ==========
+      const slides = document.querySelectorAll('.carousel-slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const totalSlides = slides.length;
+      const originalSlidesCount = images.length;
+      
+      let currentIndex = 1;
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      function updateCarousel(index, animate = true) {
+        carouselTrack.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
+        
+        const slideWidth = carouselTrack.clientWidth;
+        carouselTrack.style.transform = `translateX(-${index * slideWidth}px)`;
+        
+        let indicatorIndex;
+        if (index === 0) indicatorIndex = originalSlidesCount - 1;
+        else if (index === totalSlides - 1) indicatorIndex = 0;
+        else indicatorIndex = index - 1;
+        
+        indicators.forEach((ind, i) => {
+          if (i === indicatorIndex) {
+            ind.classList.add('active');
+          } else {
+            ind.classList.remove('active');
+          }
+        });
+        
+        currentIndex = index;
+      }
+
+      function checkAndJump() {
+        const slideWidth = carouselTrack.clientWidth;
+        
+        if (currentIndex === totalSlides - 1) {
+          setTimeout(() => {
+            carouselTrack.style.transition = 'none';
+            carouselTrack.style.transform = `translateX(-${1 * slideWidth}px)`;
+            currentIndex = 1;
+          }, 300);
+        }
+        
+        if (currentIndex === 0) {
+          setTimeout(() => {
+            carouselTrack.style.transition = 'none';
+            carouselTrack.style.transform = `translateX(-${(totalSlides - 2) * slideWidth}px)`;
+            currentIndex = totalSlides - 2;
+          }, 300);
+        }
+      }
+
+      window.addEventListener('load', function() {
+        updateCarousel(1, false);
+      });
+
+      window.addEventListener('resize', function() {
+        updateCarousel(currentIndex, false);
+      });
+
+      // Événements tactiles
+      carouselTrack.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        currentX = startX;
+        isDragging = true;
+        carouselTrack.style.transition = 'none';
+        e.preventDefault();
+      }, { passive: false });
+
+      carouselTrack.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        const slideWidth = carouselTrack.clientWidth;
+        
+        const maxDrag = slideWidth * 0.3;
+        const boundedDiff = Math.max(-maxDrag, Math.min(maxDrag, diff));
+        
+        carouselTrack.style.transform = `translateX(calc(-${currentIndex * slideWidth}px + ${boundedDiff}px))`;
+        
+        e.preventDefault();
+      }, { passive: false });
+
+      carouselTrack.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        carouselTrack.style.transition = 'transform 0.3s ease-out';
+        
+        const diff = currentX - startX;
+        const slideWidth = carouselTrack.clientWidth;
+        
+        let newIndex = currentIndex;
+        
+        if (Math.abs(diff) > slideWidth * 0.2) {
+          if (diff > 0) {
+            newIndex = currentIndex - 1;
+          } else {
+            newIndex = currentIndex + 1;
+          }
+        }
+        
+        newIndex = Math.max(0, Math.min(totalSlides - 1, newIndex));
+        
+        updateCarousel(newIndex, true);
+        checkAndJump();
+        
+        startX = 0;
+        currentX = 0;
+      });
+
+      carouselTrack.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+      });
+
+      // ========== GESTION DES PRIX ==========
+      const quantiteInput = document.getElementById('quantite');
+      const moinsBtn = document.getElementById('moinsBtn');
+      const plusBtn = document.getElementById('plusBtn');
+      const totalSpan = document.getElementById('totalAffichage');
+      const fraisDetail = document.getElementById('fraisDetail');
+      const wilayaSelect = document.getElementById('wilaya');
+      const stopdeskRadio = document.getElementById('stopdesk');
+      const domicileRadio = document.getElementById('domicile');
+      const stopdeskPriceSpan = document.getElementById('stopdeskPrice');
+      const domicilePriceSpan = document.getElementById('domicilePrice');
+
+      // Remplir la liste des wilayas
+      Object.keys(DELIVERY_FEES).sort().forEach(wilaya => {
+        const option = document.createElement('option');
+        option.value = wilaya;
+        option.textContent = wilaya;
+        wilayaSelect.appendChild(option);
+      });
+
+      function getFraisWilaya() {
+        const selected = wilayaSelect.value;
+        if (!selected || !DELIVERY_FEES[selected]) return { stopdesk: 0, domicile: 0 };
+        return DELIVERY_FEES[selected];
+      }
+
+      function getFraisActuel() {
+        const frais = getFraisWilaya();
+        return stopdeskRadio.checked ? frais.stopdesk : frais.domicile;
+      }
+
+      function updateDeliveryPrices() {
+        const frais = getFraisWilaya();
+        
+        if (frais.stopdesk > 0) {
+          stopdeskPriceSpan.textContent = frais.stopdesk + ' DA';
+          stopdeskPriceSpan.style.opacity = '1';
+        } else {
+          stopdeskPriceSpan.textContent = 'Non disponible';
+          stopdeskPriceSpan.style.opacity = '0.7';
+          if (stopdeskRadio.checked && frais.stopdesk === 0) {
+            domicileRadio.checked = true;
+          }
+        }
+        
+        if (frais.domicile > 0) {
+          domicilePriceSpan.textContent = frais.domicile + ' DA';
+          domicilePriceSpan.style.opacity = '1';
+        } else {
+          domicilePriceSpan.textContent = 'Non disponible';
+          domicilePriceSpan.style.opacity = '0.7';
+        }
+      }
+
+      function updatePrixTotal() {
+        let qty = parseInt(quantiteInput.value, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        
+        const fraisLivraison = getFraisActuel();
+        
+        const totalProduit = PRODUCT.unitPrice * qty;
+        const totalGeneral = totalProduit + fraisLivraison;
+        
+        totalSpan.textContent = totalGeneral.toLocaleString('fr-DZ') + ' DZD';
+        
+        let produitText = `⌚ Montre: ${PRODUCT.unitPrice.toLocaleString('fr-DZ')} DZD x${qty}`;
+        let livraisonText = '';
+        
+        if (fraisLivraison > 0) {
+          let typeText = stopdeskRadio.checked ? 'Stop Desk' : 'Domicile';
+          livraisonText = `📦 ${typeText}: ${fraisLivraison.toLocaleString('fr-DZ')} DZD`;
+        } else {
+          livraisonText = `📦 Livraison: sélectionnez wilaya`;
+        }
+        
+        fraisDetail.innerHTML = `<span>${produitText}</span><span>${livraisonText}</span>`;
+        
+        updateDeliveryPrices();
+      }
+
+      // Événements
+      function incrementer() {
+        let val = parseInt(quantiteInput.value, 10);
+        quantiteInput.value = isNaN(val) ? 1 : val + 1;
+        updatePrixTotal();
+      }
+      
+      function decrementer() {
+        let val = parseInt(quantiteInput.value, 10);
+        if (val > 1) quantiteInput.value = val - 1;
+        updatePrixTotal();
+      }
+
+      moinsBtn.addEventListener('click', decrementer);
+      plusBtn.addEventListener('click', incrementer);
+      
+      wilayaSelect.addEventListener('change', updatePrixTotal);
+      stopdeskRadio.addEventListener('change', updatePrixTotal);
+      domicileRadio.addEventListener('change', updatePrixTotal);
+
+      // Initialisation des prix
+      updatePrixTotal();
+
+      // ========== VALIDATION & ENVOI ==========
+      const form = document.getElementById('orderForm');
+      const GOOGLE_SCRIPT_URL = config.GOOGLE_SCRIPT_URL;
+
+      function clearFieldErrors() {
+        document.querySelectorAll('.field-error').forEach(el => {
+          el.classList.remove('field-error');
+        });
+      }
+
+      function scrollToFirstInvalid() {
+        clearFieldErrors();
+        
+        const nom = document.getElementById('nom');
+        const tel = document.getElementById('tel');
+        const wilaya = document.getElementById('wilaya');
+        const adresse = document.getElementById('adresse');
+        
+        if (!nom.value.trim()) {
+          nom.classList.add('field-error');
+          nom.focus({ preventScroll: true });
+          nom.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return true;
+        }
+        
+        if (!tel.value.trim()) {
+          tel.classList.add('field-error');
+          tel.focus({ preventScroll: true });
+          tel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return true;
+        }
+        
+        if (!wilaya.value) {
+          wilaya.classList.add('field-error');
+          wilaya.focus({ preventScroll: true });
+          wilaya.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return true;
+        }
+        
+        if (!adresse.value.trim()) {
+          adresse.classList.add('field-error');
+          adresse.focus({ preventScroll: true });
+          adresse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return true;
+        }
+        
+        return false;
+      }
+
+      function validateForm() {
+        let isValid = true;
+        document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
+
+        const nom = document.getElementById('nom');
+        if (!nom.value.trim()) {
+          document.getElementById('errorNom').textContent = 'Nom et prénom requis';
+          isValid = false;
+        }
+
+        const tel = document.getElementById('tel');
+        if (!tel.value.trim()) {
+          document.getElementById('errorTel').textContent = 'Numéro de téléphone obligatoire';
+          isValid = false;
+        }
+
+        const wilaya = document.getElementById('wilaya');
+        if (!wilaya.value) {
+          document.getElementById('errorWilaya').textContent = 'Veuillez choisir une wilaya';
+          isValid = false;
+        }
+
+        const adresse = document.getElementById('adresse');
+        if (!adresse.value.trim()) {
+          document.getElementById('errorAdresse').textContent = 'Adresse requise';
+          isValid = false;
+        }
+
+        const qty = parseInt(quantiteInput.value, 10);
+        if (qty < 1 || isNaN(qty)) {
+          alert('La quantité doit être au moins 1');
+          isValid = false;
+        }
+        
+        const fraisActuel = getFraisActuel();
+        if (fraisActuel === 0 && wilaya.value) {
+          alert('Ce mode de livraison n\'est pas disponible pour cette wilaya');
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          scrollToFirstInvalid();
+        }
+        
+        return isValid;
+      }
+
+      async function envoyerVersGoogleSheets(data) {
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          return true;
+        } catch (error) {
+          console.error('Erreur fetch Google Sheets:', error);
+          return false;
+        }
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        const nomValue = document.getElementById('nom').value.trim();
+        const telValue = document.getElementById('tel').value.trim();
+        const wilayaValue = document.getElementById('wilaya').value;
+        const adresseValue = document.getElementById('adresse').value.trim();
+        const livraison = document.querySelector('input[name="livraisonType"]:checked')?.value || 'Stop Desk';
+        const quantite = parseInt(quantiteInput.value, 10);
+        
+        const fraisLivraison = getFraisActuel();
+        const totalProduit = PRODUCT.unitPrice * quantite;
+        const totalGeneral = totalProduit + fraisLivraison;
+
+        const commande = {
+          timestamp: new Date().toLocaleString('fr-FR', { timeZone: 'Africa/Algiers' }),
+          nom: nomValue,
+          telephone: telValue,
+          wilaya: wilayaValue,
+          adresse: adresseValue,
+          typeLivraison: livraison,
+          quantite: quantite,
+          prixUnitaire: PRODUCT.unitPrice,
+          fraisLivraison: fraisLivraison,
+          total: totalGeneral,
+          statut: 'Nouvelle commande',
+          produit: PRODUCT.name
+        };
+
+        const feedbackDiv = document.getElementById('formFeedback');
+        feedbackDiv.innerHTML = '<div class="success-message" style="background:#fff3cd;">⏳ Envoi de votre commande...</div>';
+
+        const success = await envoyerVersGoogleSheets(commande);
+        
+        if (success) {
+          feedbackDiv.innerHTML = '<div class="success-message">✓ Merci ! Votre commande a été reçue. Nous vous contacterons sous 24h.</div>';
+          form.reset();
+          quantiteInput.value = 1;
+          document.getElementById('stopdesk').checked = true;
+          document.getElementById('wilaya').value = '';
+          updatePrixTotal();
+          clearFieldErrors();
+        } else {
+          feedbackDiv.innerHTML = '<div class="success-message" style="background:#f8dddd; color:#a1312b;">❌ Erreur de connexion. Veuillez réessayer ou nous appeler.</div>';
+        }
+      });
+
+      // Nettoyage des erreurs à la saisie
+      document.getElementById('nom').addEventListener('input', function() {
+        this.classList.remove('field-error');
+      });
+      document.getElementById('tel').addEventListener('input', function() {
+        this.classList.remove('field-error');
+      });
+      document.getElementById('adresse').addEventListener('input', function() {
+        this.classList.remove('field-error');
+      });
+      document.getElementById('wilaya').addEventListener('change', function() {
+        this.classList.remove('field-error');
+      });
+    })();
+  </script>
+</body>
+</html>
